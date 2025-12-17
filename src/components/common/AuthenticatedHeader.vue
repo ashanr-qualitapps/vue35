@@ -1,14 +1,14 @@
 <template>
   <v-app-bar color="primary" dark app height="48" elevation="0">
-    <v-toolbar-title class="d-none d-sm-block">Vue App</v-toolbar-title>
-    <v-toolbar-title class="d-block d-sm-none text-body-1">Vue</v-toolbar-title>
-    <v-spacer></v-spacer>
+    <v-app-bar-nav-icon @click="$emit('toggle-drawer')" class="d-block d-md-none" />
+    
+    <v-toolbar-title class="d-none d-sm-block">Dashboard</v-toolbar-title>
+    <v-toolbar-title class="d-block d-sm-none text-body-1">Dash</v-toolbar-title>
+    
+    <v-spacer />
     
     <!-- Desktop Actions -->
     <div class="d-none d-sm-flex align-center">
-      <!-- Notification Bell -->
-      <NotificationPanel />
-      
       <!-- Home Link -->
       <v-btn icon to="/" class="mr-2">
         <v-icon color="white">mdi-home-outline</v-icon>
@@ -41,14 +41,17 @@
   </v-app-bar>
 </template>
 
-<script setup>
-import { useRouter } from 'vue-router'
-import NotificationPanel from './NotificationPanel.vue'
-
-const router = useRouter()
-
-function logout() {
-  console.log('Logout clicked')
-  router.push('/')
+<script>
+export default {
+  name: 'AuthenticatedHeader',
+  emits: ['toggle-drawer'],
+  methods: {
+    logout() {
+      // Handle logout logic here
+      console.log('Logout clicked')
+      // For demo purposes, redirect to home
+      this.$router.push('/')
+    }
+  }
 }
 </script>
